@@ -24,13 +24,20 @@ protected:
 	double height;
 };
 
-class Rectangle : public Shape {
+class Triangle : public Shape {
 public:
-	Rectangle(double a = 0, double b = 0) :Shape(a, b) { }
+	Triangle(double a = 0, double b = 0) :Shape(a, b) { }
 
 	double area() {
-		return (width * height);
+		return (width * height / 2);
 	}
 };
+class Circle : public Shape {
+public:
+	Circle(double a = 0, double b = 0) :Shape(a, b) { }
 
+	double area() {
+		return (width * width * 3.1415926);
+	}
+};
 #endif

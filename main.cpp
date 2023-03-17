@@ -1,52 +1,67 @@
 #include <iostream>
 using namespace std;
-#include <stdlib.h>
-#include <string.h>
-#include "shapes.h"
 
-const char *usage = "Usage: a.out [type] [num1] [num2] \n"
-		    "	type - circle, rectangle, triangle \n"
-		    "	num1 - width or radius \n"
-		    "	num2 - length \n";
+class Shape {
+public:
+   virtual float area() = 0;
+};
 
-int main(int argc, char *argv[]) 
-{
-	double num1 = 0, num2 = 0;
+class Triangle: public Shape {
+private:
+   float base;
+   float height;
 
-	if (argc < 3) {
-	    cout << usage << endl;
-	    return -1;
-	} else {
-		num1 = atof(argv[2]);
-		if (argc == 4)
-			num2 = atof(argv[3]);
-	}
+public:
+   Triangle(float b, float h) {
+      base = b;
+      height = h;
+   }
 
-	Shape *shape;
-	Rectangle rect;
-	/**** Uncomment the code after you create class Circle and Triangle in shapes.h
-	Circle circle;
-	Triangle triangle;
-	****/
+   float area() {
+      return 0.5*base*height;
+   }
+};
 
-    if (strcmp(argv[1], "rectangle") == 0)
-		shape = &rect;
-	/**** Uncomment the code after you create class Circle and Triangle in shapes.h
-	else if (strcmp(argv[1], "triangle") == 0)
-		shape = &triangle;
-	else if (strcmp(argv[1], "circle") == 0)
-		shape = &circle;
-	*****/
-	else {
-		cout << "Error! Unknown shape type" << endl;
-		return -2;
-	}
+class Circle: public Shape {
+private:
+   float radius;
 
-	shape->setWidth(num1);
-	shape->setHeight(num2);
-	
-	// Print the area of the object.
-	cout << shape->area() << endl;
+public:
+   Circle(float r) {
+      radius = r;
+   }
 
-	return 0;
+   float area() {
+      return 3.14159*radius*radius;
+   }
+};
+
+int main() {
+   Shape *s;
+   float length, width, base, height, radius;
+
+
+   
+
+   // Get dimensions for triangle
+   cout << "Enter base and height of triangle: ";
+   cin >> base >> height;
+   Triangle t(base, height);
+
+   // Get dimensions for circle
+   cout << "Enter radius of circle: ";
+   cin >> radius;
+   Circle c(radius);
+
+   // Calculate and output areas
+
+
+   s = &t;
+   cout << "Area of Triangle is: " << s->area() << endl;
+
+   s = &c;
+   cout << "Area of Circle is: " << s->area() << endl;
+
+   return 0;
 }
+
